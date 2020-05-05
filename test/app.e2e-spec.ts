@@ -45,11 +45,11 @@ import { AppService } from '../src/app.service';
 //   })
 // });
 
-// describe('AppController (e2e)', () => {
+describe('AppController (e2e)', () => {
 
-//   it(`/users (GET)`, () => {
-//     const word = 'hello';
-//     expect(word).toEqual('hello');
-//   });
+  it(`/users (GET)`, () => {
+    const word = 'hello';
+    expect(word).toEqual('hello');
+  });
 
-// });
+});
