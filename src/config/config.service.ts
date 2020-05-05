@@ -1,8 +1,8 @@
-import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+// import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import * as Joi from 'joi';
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
-import * as config from 'config';
+// import * as config from 'config';
 
 import { DatabaseConfig } from './database-config.interface';
 import { EnvConfig } from './env-config.interface';
@@ -11,17 +11,28 @@ import bunyan = require('bunyan');
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { LoggingBunyan } = require('@google-cloud/logging-bunyan');
-
 const loggingBunyan = new LoggingBunyan();
+let logger: bunyan;
 
-const logger = bunyan.createLogger({
+console.log(`Environment: ${process.env.NODE_ENV}`);
 
-  name: 'config-service',
-  streams: [
-    { stream: process.stdout, level: 'info' },
-    loggingBunyan.stream('info'),
-  ],
-});
+if (process.env.NODE_ENV === 'production') {
+  logger = bunyan.createLogger({
+    // The JSON payload of the log as it appears in Stackdriver Logging
+    // will contain "name": "my-service"
+    name: 'config.service',
+    streams: [
+      // Log to the console at 'info' and above
+      { stream: process.stdout, level: 'info' },
+      // And log to Stackdriver Logging, logging at 'info' and above
+      loggingBunyan.stream('info'),
+    ],
+  });
+} else {
+  logger = bunyan.createLogger({
+    name: 'config.service',
+  });
+}
 
 export class ConfigService {
   private readonly envConfig: EnvConfig;
@@ -30,15 +41,17 @@ export class ConfigService {
 
   constructor(filePath: string) {
 
-    try {
-      this.dbConfig = config.get('db');
-    } catch (error) {
-      logger.info('config.get("db")')
-      logger.error('error');
-    }
+    // try {
+    //   this.dbConfig = config.get('db');
+    //   console.log(this.dbConfig);
+    // } catch (error) {
+    //   logger.info('config.get("db")')
+    //   logger.error('error');
+    // }
 
     try {
-      this.envConfig = dotenv.parse(fs.readFileSync(filePath));
+      this.econfig = dotenv.parse(fs.readFileSync(filePath));
+      console.log(this.econfig);
     } catch (error) {
       logger.info('dotenv.parse(fs.readFileSync(filePath))')
       logger.error('error');
@@ -83,7 +96,11 @@ export class ConfigService {
       DATABASE_DBNAME: Joi
         .string()
         .default('postgres'),
+      SYNCHRONIZE: Joi
+        .string()
+        .default('false'),
     });
+    
 
     const { error, value: validatedEnvConfig } = Joi.validate(
       envConfig,
