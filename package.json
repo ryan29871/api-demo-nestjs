@@ -23,10 +23,12 @@
     "migrate:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert"
   },
   "dependencies": {
+    "@google-cloud/logging-bunyan": "^2.0.3",
     "@nestjs/common": "^7.0.0",
     "@nestjs/core": "^7.0.0",
     "@nestjs/platform-express": "^7.0.0",
     "@nestjs/typeorm": "^7.0.0",
+    "bunyan": "^1.8.12",
     "config": "^3.3.1",
     "pg": "^8.0.3",
     "reflect-metadata": "^0.1.13",
@@ -38,6 +40,7 @@
     "@nestjs/cli": "^7.0.0",
     "@nestjs/schematics": "^7.0.0",
     "@nestjs/testing": "^7.0.0",
+    "@types/bunyan": "^1.8.6",
     "@types/express": "^4.17.3",
     "@types/jest": "25.1.4",
     "@types/node": "^13.9.1",
