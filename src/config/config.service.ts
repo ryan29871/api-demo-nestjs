@@ -117,6 +117,9 @@ export class ConfigService {
   }
 
   createTypeOrmOptions() {
+
+    const SOURCE_PATH = process.env.NODE_ENV === 'production' ? 'dist' : 'src'
+
     return {
       type: 'postgres' as 'postgres',
       host: this.get('DATABASE_HOST'),
@@ -124,7 +127,7 @@ export class ConfigService {
       username: this.get('DATABASE_USER'),
       password: this.get('DATABASE_PASSWORD'),
       database: this.get('DATABASE_DBNAME'),
-      entities: [__dirname + '/../**/*.entity.{js,ts}'],
+      entities: [`${SOURCE_PATH}/**/**.entity{.ts,.js}`],
       synchronize: false,
       migrationsRun: true,
       migrations: [__dirname + '/../migration/*{.ts,.js}'],
