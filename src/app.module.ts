@@ -13,10 +13,20 @@ import { ApiModule } from './api/api.module';
 @Module({
   imports: [
     // TypeOrmModule.forRoot(typeOrmConfig),
-    TypeOrmModule.forRootAsync({
-      imports: [ConfigModule],
-      useExisting: ConfigService,
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: '10.103.80.3',
+      port: 5432,
+      username: 'demouser',
+      password: '123456',
+      database: 'demo',
+      entities: [__dirname + '/../**/**/*.entity{.ts,.js}'],
+      synchronize: false,
     }),
+    // TypeOrmModule.forRootAsync({
+    //   imports: [ConfigModule],
+    //   useExisting: ConfigService,
+    // }),
     ApiModule,
   ],
   controllers: [AppController],
