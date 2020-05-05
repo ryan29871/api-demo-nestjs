@@ -1,9 +1,10 @@
 import { Controller, Get } from '@nestjs/common';
 import { AppService } from './app.service';
 
-const bunyan = require('bunyan');
+import bunyan = require('bunyan');
 
 // Imports the Google Cloud client library for Bunyan
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { LoggingBunyan } = require('@google-cloud/logging-bunyan');
 
 // Creates a Bunyan Stackdriver Logging client
