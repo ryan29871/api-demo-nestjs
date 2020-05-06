@@ -22,6 +22,7 @@ import { ApiModule } from './api/api.module';
       database: 'demo',
       entities: [__dirname + '/../**/*.entity.{js,ts}'],
       synchronize: false,
+      autoLoadEntities: true,
     }),
     // TypeOrmModule.forRootAsync({
     //   imports: [ConfigModule],
