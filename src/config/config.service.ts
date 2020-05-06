@@ -1,4 +1,4 @@
-// import { TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import * as Joi from 'joi';
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
@@ -107,8 +107,8 @@ export class ConfigService {
     return this.envConfig[key];
   }
 
-  createTypeOrmOptions() {
-
+  // Set synchronize to true on very first run to add all tables to db, then use migrations after for prod.
+  createTypeOrmOptions(): TypeOrmModuleOptions {
     return {
       type: 'postgres' as 'postgres',
       host: this.get('DATABASE_HOST'),
@@ -118,7 +118,7 @@ export class ConfigService {
       database: this.get('DATABASE_DBNAME'),
       autoLoadEntities: true,
       synchronize: false,
-      migrationsRun: false,
+      migrationsRun: true,
       migrations: [__dirname + '/../migration/*{.ts,.js}'],
       cli: {
         migrationsDir: 'migration',
