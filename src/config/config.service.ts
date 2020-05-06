@@ -127,9 +127,10 @@ export class ConfigService {
       username: this.get('DATABASE_USER'),
       password: this.get('DATABASE_PASSWORD'),
       database: this.get('DATABASE_DBNAME'),
-      entities: [__dirname + '/../**/*.entity.{js,ts}'],
+      // entities: [__dirname + '/**/*.entity.{js,ts}'],
+      autoLoadEntities: true,
       synchronize: false,
-      migrationsRun: true,
+      migrationsRun: false,
       migrations: [__dirname + '/../migration/*{.ts,.js}'],
       cli: {
         migrationsDir: 'migration',
