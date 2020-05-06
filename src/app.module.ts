@@ -40,7 +40,7 @@ import { ApiModule } from './api/api.module';
     //   imports: [ConfigModule],
     //   useExisting: ConfigService,
     // }),
-    ApiModule,
+    // ApiModule,
   ],
   controllers: [AppController],
   providers: [AppService],
