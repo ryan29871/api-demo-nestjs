@@ -25,11 +25,12 @@ async function bootstrap() {
 
   // await app.listen(configService.get('PORT'));
   // logger.log(`Application listening on port ${configService.get('PORT')}`);
-// 
+
 
   app.setGlobalPrefix('v1/api');
 
   await app.listen(3001);
   logger.log(`Application listening on port 3001`);
+  // console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();

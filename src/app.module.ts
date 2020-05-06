@@ -20,7 +20,7 @@ import { ApiModule } from './api/api.module';
       username: 'demouser',
       password: '123456',
       database: 'demo',
-      entities: [__dirname + '/../**/**/*.entity{.ts,.js}'],
+      entities: [__dirname + '/../**/*.entity.{js,ts}'],
       synchronize: false,
     }),
     // TypeOrmModule.forRootAsync({
