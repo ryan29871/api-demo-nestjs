@@ -21,9 +21,9 @@ import { ApiModule } from './api/api.module';
       password: '123456',
       database: 'demo',
       // entities: [__dirname + '/**/*.entity.{js,ts}'],
-      synchronize: false,
+      synchronize: true,
       autoLoadEntities: true,
-      migrationsRun: true,
+      // migrationsRun: true,
     }),
     // TypeOrmModule.forRoot({
     //   type: 'postgres',
