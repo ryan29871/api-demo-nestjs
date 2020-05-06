@@ -23,6 +23,7 @@ import { ApiModule } from './api/api.module';
       // entities: [__dirname + '/**/*.entity.{js,ts}'],
       synchronize: false,
       autoLoadEntities: true,
+      migrationsRun: true,
     }),
     // TypeOrmModule.forRoot({
     //   type: 'postgres',
