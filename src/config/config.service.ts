@@ -135,11 +135,11 @@ export class ConfigService {
       cli: {
         migrationsDir: 'migration',
       },
-      extra: {
-        ssl: this.get('NODE_ENV') === 'production'
-          ? true
-          : false,
-      },
+      // extra: {
+      //   ssl: this.get('NODE_ENV') === 'production'
+      //     ? true
+      //     : false,
+      // },
     };
   }
 
