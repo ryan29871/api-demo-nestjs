@@ -3,11 +3,11 @@ import { Logger } from '@nestjs/common';
 import { AppModule } from './app.module';
 // import * as config from 'config';
 // import { ServerConfig } from './config/server-config.interface';
-// import { ConfigService } from './config/config.service';
+import { ConfigService } from './config/config.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  // const configService: ConfigService = app.get(ConfigService);
+  const configService: ConfigService = app.get(ConfigService);
   // const serverConfig: ServerConfig = config.get('server');
   const logger = new Logger('bootstrap');
 
@@ -15,22 +15,15 @@ async function bootstrap() {
     app.enableCors();
   } else {
     app.enableCors();
+    //   app.enableCors({ origin: serverConfig.origin });
+    //   logger.log(`Accepting requests from origin "${serverConfig.origin}"`);
   }
-  //else {
-  //   app.enableCors({ origin: serverConfig.origin });
-  //   logger.log(`Accepting requests from origin "${serverConfig.origin}"`);
-  // }
 
-  // app.setGlobalPrefix(configService.get('URL_PREFIX'));
+  app.setGlobalPrefix(configService.get('URL_PREFIX'));
 
-  // await app.listen(configService.get('PORT'));
-  // logger.log(`Application listening on port ${configService.get('PORT')}`);
+  await app.listen(configService.get('PORT'));
+  logger.log(`Application listening on port ${configService.get('PORT')}`);
 
-
-  app.setGlobalPrefix('v1/api');
-
-  await app.listen(3001);
-  logger.log(`Application listening on port 3001`);
-  // console.log(`Application is running on: ${await app.getUrl()}`);
+  console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();

@@ -2,7 +2,6 @@
 import * as Joi from 'joi';
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
-// import * as config from 'config';
 
 import { DatabaseConfig } from './database-config.interface';
 import { EnvConfig } from './env-config.interface';
@@ -40,14 +39,6 @@ export class ConfigService {
   private econfig: dotenv.DotenvParseOutput;
 
   constructor(filePath: string) {
-
-    // try {
-    //   this.dbConfig = config.get('db');
-    //   console.log(this.dbConfig);
-    // } catch (error) {
-    //   logger.info('config.get("db")')
-    //   logger.error('error');
-    // }
 
     try {
       this.econfig = dotenv.parse(fs.readFileSync(filePath));
@@ -118,8 +109,6 @@ export class ConfigService {
 
   createTypeOrmOptions() {
 
-    const SOURCE_PATH = process.env.NODE_ENV === 'production' ? 'dist' : 'src'
-
     return {
       type: 'postgres' as 'postgres',
       host: this.get('DATABASE_HOST'),
@@ -127,7 +116,6 @@ export class ConfigService {
       username: this.get('DATABASE_USER'),
       password: this.get('DATABASE_PASSWORD'),
       database: this.get('DATABASE_DBNAME'),
-      // entities: [__dirname + '/**/*.entity.{js,ts}'],
       autoLoadEntities: true,
       synchronize: false,
       migrationsRun: false,
@@ -135,6 +123,7 @@ export class ConfigService {
       cli: {
         migrationsDir: 'migration',
       },
+      // entities: [__dirname + '/**/*.entity.{js,ts}'],
       // extra: {
       //   ssl: this.get('NODE_ENV') === 'production'
       //     ? true
@@ -144,15 +133,3 @@ export class ConfigService {
   }
 
 }
-
-// export const typeOrmConfig: TypeOrmModuleOptions = {
-//   type: dbConfig.type,
-//   host: process.env.RDS_HOSTNAME || dbConfig.host,
-//   port: Number(process.env.RDS_PORT) || dbConfig.port,
-//   username: process.env.RDS_USERNAME || dbConfig.username,
-//   password: process.env.RDS_PASSWORD || dbConfig.password,
-//   database: process.env.RDS_DB_NAME || dbConfig.database,
-//   entities: [__dirname + '/../**/*.entity.{js,ts}'],
-//   synchronize: process.env.TYPEORM_SYNC === 'true' || dbConfig.synchronize,
-// }
-
