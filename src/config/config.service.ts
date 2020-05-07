@@ -90,7 +90,7 @@ export class ConfigService {
 
   // Set synchronize to true on very first run to add all tables to db, then use migrations after for prod.
   createTypeOrmOptions(): TypeOrmModuleOptions {
-    console.log('console log');
+    console.log('console log start');
     logger.info('logger');
     const ormConfig = {
       type: 'postgres' as 'postgres',
@@ -100,14 +100,13 @@ export class ConfigService {
       password: this.get('DATABASE_PASSWORD'),
       database: this.get('DATABASE_DBNAME'),
       autoLoadEntities: true,
-      // synchronize: (this.get('SYNCHRONIZE') === 'true'),
-      synchronize: true,
+      // synchronize: (this.get('SYNCHRONIZE') === 'true'), // Need to switch back to this after migrations is working
+      synchronize: true, // This works and must run on first go
       migrationsRun: false,
       migrations: [__dirname + '/../migration/*{.ts,.js}'],
       cli: {
         migrationsDir: 'migration',
       },
-      // entities: [__dirname + '/../**/*.entity.{js,ts}'], //local
       entities: [__dirname + '/../**/*.entity.{js,ts}'],
       // entities: [User, Users], //local
       // extra: {
@@ -117,6 +116,7 @@ export class ConfigService {
       // },
     };
     logger.info(ormConfig);
+    console.log('console log end');
     return ormConfig;
   }
 }
