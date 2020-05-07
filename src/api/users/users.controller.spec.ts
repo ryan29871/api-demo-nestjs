@@ -13,13 +13,11 @@ const user = {
   updatedAt: null,
 };
 const serviceResult = {
-  findAll:  [
-    {...user},
-  ],
-  findOne: {...user},
+  findAll: [{ ...user }],
+  findOne: { ...user },
   remove: null,
-  create: {...user},
-  update: {...user},
+  create: { ...user },
+  update: { ...user },
 };
 const MockUsersService = {
   async findAll() {
@@ -44,12 +42,10 @@ describe('UsersController', () => {
   let usersService: UsersService;
 
   beforeAll(async () => {
-    const app = await Test
-      .createTestingModule({
-        controllers: [UsersController],
-        providers: [{ provide: UsersService, useValue: MockUsersService }],
-      })
-      .compile();
+    const app = await Test.createTestingModule({
+      controllers: [UsersController],
+      providers: [{ provide: UsersService, useValue: MockUsersService }],
+    }).compile();
 
     usersService = app.get<UsersService>(UsersService);
     usersController = app.get<UsersController>(UsersController);

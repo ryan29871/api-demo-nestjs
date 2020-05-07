@@ -1,4 +1,4 @@
 export interface ServerConfig {
-    origin: string;
-    port: number;
+  origin: string;
+  port: number;
 }

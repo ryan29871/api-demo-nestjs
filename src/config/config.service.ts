@@ -8,12 +8,13 @@ import { EnvConfig } from './env-config.interface';
 
 import bunyan = require('bunyan');
 
+// import { Users } from '../api/users/users.entity';
+// import { User } from '../api/auth/user.entity';
+
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const { LoggingBunyan } = require('@google-cloud/logging-bunyan');
 const loggingBunyan = new LoggingBunyan();
 let logger: bunyan;
-
-console.log(`Environment: ${process.env.NODE_ENV}`);
 
 if (process.env.NODE_ENV === 'production') {
   logger = bunyan.createLogger({
@@ -39,12 +40,11 @@ export class ConfigService {
   private econfig: dotenv.DotenvParseOutput;
 
   constructor(filePath: string) {
-
     try {
       this.econfig = dotenv.parse(fs.readFileSync(filePath));
       console.log(this.econfig);
     } catch (error) {
-      logger.info('dotenv.parse(fs.readFileSync(filePath))')
+      logger.info('dotenv.parse(fs.readFileSync(filePath))');
       logger.error('error');
     }
 
@@ -57,46 +57,27 @@ export class ConfigService {
    */
   private validateInput(envConfig: EnvConfig): EnvConfig {
     const envVarsSchema: Joi.ObjectSchema = Joi.object({
-      NODE_ENV: Joi
-        .string()
+      NODE_ENV: Joi.string()
         .valid(['development', 'production', 'test', 'provision', 'ci'])
         .default('development'),
-      PORT: Joi
-        .number()
-        .default(3001),
-      URL_PREFIX: Joi
-        .string()
-        .default('v1/api'),
-      DATABASE_TYPE: Joi
-        .string()
+      PORT: Joi.number().default(3001),
+      URL_PREFIX: Joi.string().default('v1/api'),
+      DATABASE_TYPE: Joi.string()
         .valid(['postgres'])
         .default('postgres'),
-      DATABASE_HOST: Joi
-        .string()
-        .default('localhost'),
-      DATABASE_PORT: Joi
-        .number()
-        .default(5432),
-      DATABASE_USER: Joi
-        .string()
-        .default('postgres'),
-      DATABASE_PASSWORD: Joi
-        .string()
+      DATABASE_HOST: Joi.string().default('localhost'),
+      DATABASE_PORT: Joi.number().default(5432),
+      DATABASE_USER: Joi.string().default('postgres'),
+      DATABASE_PASSWORD: Joi.string()
         .allow('')
         .allow(null),
-      DATABASE_DBNAME: Joi
-        .string()
-        .default('postgres'),
-      SYNCHRONIZE: Joi
-        .string()
-        .default('false'),
+      DATABASE_DBNAME: Joi.string().default('postgres'),
+      SYNCHRONIZE: Joi.string().default('false'),
+      JWT_SECRET: Joi.string().default('area51'),
+      JWT_EXPIRES_IN: Joi.number().default(3600),
     });
-    
 
-    const { error, value: validatedEnvConfig } = Joi.validate(
-      envConfig,
-      envVarsSchema,
-    );
+    const { error, value: validatedEnvConfig } = Joi.validate(envConfig, envVarsSchema);
     if (error) {
       throw new Error(`Config validation error: ${error.message}`);
     }
@@ -117,13 +98,14 @@ export class ConfigService {
       password: this.get('DATABASE_PASSWORD'),
       database: this.get('DATABASE_DBNAME'),
       autoLoadEntities: true,
-      synchronize: false,
-      migrationsRun: true,
+      synchronize: (this.get('SYNCHRONIZE') === 'true'),
+      migrationsRun: false,
       migrations: [__dirname + '/../migration/*{.ts,.js}'],
       cli: {
         migrationsDir: 'migration',
       },
-      // entities: [__dirname + '/**/*.entity.{js,ts}'],
+      entities: [__dirname + '/../**/*.entity.{js,ts}'],
+      // entities: [User, Users],
       // extra: {
       //   ssl: this.get('NODE_ENV') === 'production'
       //     ? true
@@ -131,5 +113,4 @@ export class ConfigService {
       // },
     };
   }
-
 }

@@ -1,13 +1,4 @@
-import {
-  Body,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-  Controller,
-  UsePipes,
-} from '@nestjs/common';
+import { Body, Delete, Get, Param, Post, Put, Controller, UsePipes } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { ICreatedUser } from './user.interface';
 import { ValidationPipe } from '../../common/validation.pipe';

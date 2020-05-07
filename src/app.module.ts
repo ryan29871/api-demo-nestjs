@@ -20,4 +20,4 @@ import { ApiModule } from './api/api.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}
