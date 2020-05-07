@@ -21,9 +21,9 @@ import { ConfigModule } from '../../config/config.module';
           signOptions: {
             expiresIn: process.env.JWT_EXPIRES_IN || configService.get('JWT_EXPIRES_IN'),
           },
-        }
+        };
       },
-      inject: [ConfigService]
+      inject: [ConfigService],
     }),
     TypeOrmModule.forFeature([UserRepository]),
   ],
@@ -31,4 +31,4 @@ import { ConfigModule } from '../../config/config.module';
   providers: [AuthService, JwtStrategy],
   exports: [JwtStrategy, PassportModule, TypeOrmModule],
 })
-export class AuthModule { }
+export class AuthModule {}

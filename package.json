@@ -19,10 +19,10 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "test:deve2e": "NODE_ENV=test.local jest --config ./test/jest-e2e.json",
+    "test:e2edev": "NODE_ENV=test.local jest --config ./test/jest-e2e.json",
     "migrate:up": "ts-node ./node_modules/typeorm/cli.js migration:run",
     "migrate:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert",
-    "migrate:generate": ""
+    "migration:generate": "ts-node ./node_modules/typeorm/cli.js npm run typeorm migration:create -- -n"
   },
   "dependencies": {
     "@google-cloud/logging-bunyan": "^2.0.3",

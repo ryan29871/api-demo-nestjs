@@ -1,14 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { Logger } from '@nestjs/common';
 import { AppModule } from './app.module';
-// import * as config from 'config';
-// import { ServerConfig } from './config/server-config.interface';
 import { ConfigService } from './config/config.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService: ConfigService = app.get(ConfigService);
-  // const serverConfig: ServerConfig = config.get('server');
   const logger = new Logger('main');
 
   if (process.env.NODE_ENV === 'development') {
