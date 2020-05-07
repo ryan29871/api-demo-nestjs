@@ -100,14 +100,15 @@ export class ConfigService {
       password: this.get('DATABASE_PASSWORD'),
       database: this.get('DATABASE_DBNAME'),
       autoLoadEntities: true,
-      synchronize: (this.get('SYNCHRONIZE') === 'true'),
-      migrationsRun: true,
+      // synchronize: (this.get('SYNCHRONIZE') === 'true'),
+      synchronize: true,
+      migrationsRun: false,
       migrations: [__dirname + '/../migration/*{.ts,.js}'],
       cli: {
         migrationsDir: 'migration',
       },
       // entities: [__dirname + '/../**/*.entity.{js,ts}'], //local
-      // entities: [__dirname + '/../**/*.entity.{js,ts}'],
+      entities: [__dirname + '/../**/*.entity.{js,ts}'],
       // entities: [User, Users], //local
       // extra: {
       //   ssl: this.get('NODE_ENV') === 'production'
