@@ -2,7 +2,7 @@
   "name": "api-demo-nestjs",
   "version": "0.0.1",
   "description": "",
-  "author": "",
+  "author": "Ryan Skotnicki",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
