@@ -107,7 +107,7 @@ export class ConfigService {
         migrationsDir: 'migration',
       },
       // entities: [__dirname + '/../**/*.entity.{js,ts}'], //local
-      entities: [__dirname + '/../**/*.entity.{js,ts}'],
+      // entities: [__dirname + '/../**/*.entity.{js,ts}'],
       // entities: [User, Users], //local
       // extra: {
       //   ssl: this.get('NODE_ENV') === 'production'
