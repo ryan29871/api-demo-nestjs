@@ -90,7 +90,9 @@ export class ConfigService {
 
   // Set synchronize to true on very first run to add all tables to db, then use migrations after for prod.
   createTypeOrmOptions(): TypeOrmModuleOptions {
-    return {
+    console.log('console log');
+    logger.info('logger');
+    const ormConfig = {
       type: 'postgres' as 'postgres',
       host: this.get('DATABASE_HOST'),
       port: parseInt(this.get('DATABASE_PORT'), 10),
@@ -112,5 +114,7 @@ export class ConfigService {
       //     : false,
       // },
     };
+    logger.info(ormConfig);
+    return ormConfig;
   }
 }
