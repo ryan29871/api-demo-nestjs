@@ -22,7 +22,7 @@
     "test:e2edev": "NODE_ENV=test.local jest --config ./test/jest-e2e.json",
     "migrate:up": "ts-node ./node_modules/typeorm/cli.js migration:run",
     "migrate:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert",
-    "migration:generate": "ts-node ./node_modules/typeorm/cli.js npm run typeorm migration:create -- -n"
+    "migration:generate": "this works only when running this in shell: typeorm migration:create -n User"
   },
   "dependencies": {
     "@google-cloud/logging-bunyan": "^2.0.3",
