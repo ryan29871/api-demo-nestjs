@@ -18,20 +18,20 @@ spec:
           env:
             - name: NODE_ENV
               value: "production"
-          readinessProbe:
-            httpGet:
-              path: /v1/api
-              port: 8080
-            initialDelaySeconds: 60
-            periodSeconds: 30
-            timeoutSeconds: 3
-          livenessProbe:
-            httpGet:
-              path: /v1/api
-              port: 8080
-            initialDelaySeconds: 60
-            periodSeconds: 30
-            timeoutSeconds: 3
+          # readinessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 8080
+          #   initialDelaySeconds: 60
+          #   periodSeconds: 30
+          #   timeoutSeconds: 3
+          # livenessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 8080
+          #   initialDelaySeconds: 60
+          #   periodSeconds: 30
+          #   timeoutSeconds: 3
 
 ---
 
@@ -98,6 +98,9 @@ metadata:
   annotations:
     kubernetes.io/ingress.global-static-ip-name: "kubernetes-ingress"
 spec:
+  backend:
+    serviceName: api-demo-nestjs-service
+    servicePort: 80
   # tls:
   # - secretName: skotnickiservices
   rules:
@@ -105,7 +108,7 @@ spec:
     # http:
   - http:
       paths:
-      - path: /*
+      - path: /v1/api
         backend:
           serviceName: api-demo-nestjs-service
           servicePort: 80
