@@ -67,8 +67,8 @@ kind: Ingress
 metadata:
   name: api-demo-nestjs-server-ingress
 spec:
-  tls:
-  - secretName: skotnickiservices
+  # tls:
+  # - secretName: skotnickiservices
   rules:
   - host: skotnickiservices.com
     http:
