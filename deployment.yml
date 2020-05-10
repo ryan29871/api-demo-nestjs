@@ -20,6 +20,20 @@ spec:
           env:
             - name: NODE_ENV
               value: "production"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            timeoutSeconds: 3
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            timeoutSeconds: 3
 
 ---
 
@@ -91,11 +105,20 @@ spec:
     # http:
   - http:
       paths:
-      - path: /* 
+      - path: /*
         backend:
           serviceName: api-demo-nestjs-service
           servicePort: 80
-      - path: /v2/* 
+      - path: /v2/*
         backend:
           serviceName: api-demo-nestjs-service-2
           servicePort: 80
+
+
+  # tls:
+  # - hosts:
+  #   - skotnickiservices.com
+  #   secretName: skotnickiservices
+  # rules:
+  # - host: skotnickiservices.com
+  #   http:
