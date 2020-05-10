@@ -87,7 +87,7 @@ spec:
   # tls:
   # - secretName: skotnickiservices
   rules:
-  - host: skotnickiservices.com
+  # - host: skotnickiservices.com
     http:
       paths:
       - path: /* 
