@@ -32,12 +32,6 @@ spec:
             initialDelaySeconds: 60
             periodSeconds: 30
             timeoutSeconds: 3
-          startupProbe:
-            httpGet:
-              path: /v1/api
-              port: liveness-port
-            failureThreshold: 30
-            periodSeconds: 10
 
 ---
 
