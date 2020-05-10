@@ -17,7 +17,7 @@ import { ConfigModule } from '../../config/config.module';
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => {
         return {
-          secretOrPrivateKey: process.env.JWT_SECRET || configService.get('JWT_SECRET'),
+          secret: process.env.JWT_SECRET || configService.get('JWT_SECRET'),
           signOptions: {
             expiresIn: process.env.JWT_EXPIRES_IN || configService.get('JWT_EXPIRES_IN'),
           },

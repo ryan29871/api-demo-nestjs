@@ -30,5 +30,34 @@ spec:
     app: api-demo-nestjs-server
   type: LoadBalancer
   ports:
-    - port: 80
+    - name: http
+      protocol: HTTP
+      port: 80
       targetPort: 3001
+    - name: https
+      protocol: HTTP
+      port: 443
+      targetPort: 3002
+
+---
+
+# apiVersion: networking.k8s.io/v1beta1
+# kind: Ingress
+# metadata:
+#   name: api-demo-nestjs-server-ingress
+# spec:
+#   selector:
+#     app: api-demo-nestjs-server
+#   type: LoadBalancer
+#   backend:
+#     serviceName: web
+#     servicePort: 8080
+
+
+# apiVersion: networking.gke.io/v1beta2
+# kind: ManagedCertificate
+# metadata:
+#   name: api-demo-nestjs-cert
+# spec:
+#   domains:
+#     - skotnickiservices.com
