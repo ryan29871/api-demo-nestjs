@@ -73,7 +73,7 @@ spec:
   - host: skotnickiservices.com
     http:
       paths:
-      - path: /*
+      - path: 
         backend:
           serviceName: api-demo-nestjs-service
           servicePort: 80
