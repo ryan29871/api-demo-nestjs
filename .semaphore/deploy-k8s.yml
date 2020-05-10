@@ -19,6 +19,7 @@ blocks:
           - gcloud config set project $GCP_PROJECT_ID
           - gcloud config set compute/zone $GCP_PROJECT_DEFAULT_ZONE
           - gcloud container clusters get-credentials $CLUSTER_NAME --zone $GCP_PROJECT_DEFAULT_ZONE --project $GCP_PROJECT_ID
+          - gcloud compute addresses create kubernetes-ingress --global
           - checkout
       jobs:
         - name: Deploy
