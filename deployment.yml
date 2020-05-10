@@ -50,15 +50,15 @@ spec:
 #       port: 80
 #       targetPort: 3001
 
-apiVersion: v1
-kind: Secret
-metadata:
-  name: skotnickiservices
-  namespace: default
-data:
-  tls.crt: base64 encoded cert
-  tls.key: base64 encoded key
-type: kubernetes.io/tls
+# apiVersion: v1
+# kind: Secret
+# metadata:
+#   name: skotnickiservices
+#   namespace: default
+# data:
+#   tls.crt: base64 encoded cert
+#   tls.key: base64 encoded key
+# type: kubernetes.io/tls
 
 ---
 
