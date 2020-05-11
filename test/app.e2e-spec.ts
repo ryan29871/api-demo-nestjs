@@ -2,11 +2,11 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
-import { ConfigService } from '../src/config/config.service';
+// import { ConfigService } from '../src/config/config.service';
 import { AppService } from '../src/app.service';
 
 describe('AppController (e2e)', () => {
-  let prefix = '';
+  // let prefix = '';
   // const hello = 'Hello World!';
   const hello = ['Hello World!'];
   const result = {
@@ -26,16 +26,17 @@ describe('AppController (e2e)', () => {
       .compile();
 
     app = moduleFixture.createNestApplication();
-    const configService: ConfigService = app.get(ConfigService);
-    prefix = configService.get('URL_PREFIX');
-    app.setGlobalPrefix(prefix);
+    // const configService: ConfigService = app.get(ConfigService);
+    // prefix = configService.get('URL_PREFIX');
+    // app.setGlobalPrefix(prefix);
     await app.init();
   });
 
   it('/${prefix} (GET)', () => {
     return (
       request(app.getHttpServer())
-        .get(`/${prefix}/`)
+        // .get(`/${prefix}/`)
+        .get('/')
         .expect(200)
         // .expect(JSON.stringify(result.getHello));
         .expect(result.getHello)
