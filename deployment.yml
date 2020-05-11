@@ -133,6 +133,7 @@ kind: Ingress
 metadata:
   name: api-demo-nestjs-server-ingress
   annotations:
+    kubernetes.io/ingress.class: "nginx"
     kubernetes.io/ingress.global-static-ip-name: "kubernetes-ingress"
 spec:
   backend:
