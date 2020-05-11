@@ -20,14 +20,14 @@ spec:
               value: "production"
           readinessProbe:
             httpGet:
-              path: /v1/api
+              path: /healthz
               port: 80
             initialDelaySeconds: 5
             periodSeconds: 5
             timeoutSeconds: 3
           livenessProbe:
             httpGet:
-              path: /v1/api
+              path: /healthz
               port: 80
             initialDelaySeconds: 5
             periodSeconds: 5
