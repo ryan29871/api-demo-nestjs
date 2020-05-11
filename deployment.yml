@@ -133,13 +133,8 @@ kind: Ingress
 metadata:
   name: api-demo-nestjs-server-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.global-static-ip-name: "kubernetes-ingress"
 spec:
-  rules:
-  - http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          serviceName: api-demo-nestjs-service
-          servicePort: 80
+  backend:
+    serviceName: api-demo-nestjs-service
+    servicePort: 80
