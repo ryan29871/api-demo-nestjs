@@ -26,16 +26,17 @@ describe('AppController (e2e)', () => {
       .compile();
 
     app = moduleFixture.createNestApplication();
-    const configService: ConfigService = app.get(ConfigService);
-    prefix = configService.get('URL_PREFIX');
-    app.setGlobalPrefix(prefix);
+    // const configService: ConfigService = app.get(ConfigService);
+    // prefix = configService.get('URL_PREFIX');
+    // app.setGlobalPrefix(prefix);
     await app.init();
   });
 
   it('/${prefix} (GET)', () => {
     return (
       request(app.getHttpServer())
-        .get(`${prefix}`)
+        // .get(`${prefix}`)
+        .get(`/`)
         .expect(200)
         // .expect(JSON.stringify(result.getHello));
         .expect(result.getHello)
