@@ -22,14 +22,14 @@ spec:
               value: "production"
           readinessProbe:
             httpGet:
-              path: /
+              path: /healthz
               port: 80
             initialDelaySeconds: 5
             periodSeconds: 5
             timeoutSeconds: 3
           livenessProbe:
             httpGet:
-              path: /
+              path: /healthz
               port: 80
             initialDelaySeconds: 5
             periodSeconds: 5
@@ -68,7 +68,7 @@ spec:
     protocol: TCP
     port: 80
     targetPort: 3001
-    nodePort: 32000
+    nodePort: 80
 
 ---
 
