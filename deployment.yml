@@ -104,9 +104,9 @@ metadata:
     kubernetes.io/ingress.global-static-ip-name: "kubernetes-ingress"
     networking.gke.io/managed-certificates: "skotnickiservices"
 spec:
-  backend:
-    serviceName: api-demo-nestjs-service
-    servicePort: 80
+  # backend:
+  #   serviceName: api-demo-nestjs-service
+  #   servicePort: 80
   # tls:
   # - hosts:
   #   - www.skotnickiservices.com
