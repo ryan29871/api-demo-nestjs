@@ -25,13 +25,13 @@ spec:
             initialDelaySeconds: 5
             periodSeconds: 5
             timeoutSeconds: 3
-          # livenessProbe:
-          #   httpGet:
-          #     path: /v1/api
-          #     port: 80
-          #   initialDelaySeconds: 60
-          #   periodSeconds: 30
-          #   timeoutSeconds: 3
+          livenessProbe:
+            httpGet:
+              path: /v1/api
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 3
 
 ---
 
