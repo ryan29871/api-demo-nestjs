@@ -35,7 +35,7 @@ describe('AppController (e2e)', () => {
   it('/${prefix} (GET)', () => {
     return (
       request(app.getHttpServer())
-        .get(`/${prefix}/`)
+        .get(`${prefix}`)
         .expect(200)
         // .expect(JSON.stringify(result.getHello));
         .expect(result.getHello)
