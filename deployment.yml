@@ -22,8 +22,8 @@ spec:
             httpGet:
               path: /v1/api
               port: 80
-            initialDelaySeconds: 60
-            periodSeconds: 30
+            initialDelaySeconds: 5
+            periodSeconds: 5
             timeoutSeconds: 3
           # livenessProbe:
           #   httpGet:
@@ -102,16 +102,17 @@ metadata:
   name: api-demo-nestjs-server-ingress
   annotations:
     kubernetes.io/ingress.global-static-ip-name: "kubernetes-ingress"
+    networking.gke.io/managed-certificates: "skotnickiservices"
 spec:
   backend:
     serviceName: api-demo-nestjs-service
     servicePort: 80
-  tls:
-  - hosts:
-    - www.skotnickiservices.com
-    secretName: skotnickiservices
+  # tls:
+  # - hosts:
+  #   - www.skotnickiservices.com
+  #   # secretName: skotnickiservices
   rules:
-  - host: www.skotnickiservices.com
+  - host: skotnickiservices.com
     http:
       paths:
       - path: /v1/api
