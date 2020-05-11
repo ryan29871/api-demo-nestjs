@@ -16,7 +16,7 @@ spec:
         - name: api-demo-nestjs-server
           image: gcr.io/$GCP_PROJECT_ID/api-demo-nestjs-server:$SEMAPHORE_WORKFLOW_ID
           ports:
-              containerPort: 80
+            - containerPort: 80
           env:
             - name: NODE_ENV
               value: "production"
