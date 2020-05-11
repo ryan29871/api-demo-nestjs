@@ -16,7 +16,7 @@ async function bootstrap() {
     //   logger.log(`Accepting requests from origin "${serverConfig.origin}"`);
   }
 
-  // app.setGlobalPrefix(configService.get('URL_PREFIX'));
+  app.setGlobalPrefix(configService.get('URL_PREFIX'));
 
   await app.listen(configService.get('PORT'));
   logger.log(`Application listening on port ${configService.get('PORT')}`);

@@ -61,7 +61,7 @@ export class ConfigService {
         .valid(['development', 'production', 'test', 'provision', 'ci'])
         .default('development'),
       PORT: Joi.number().default(3001),
-      // URL_PREFIX: Joi.string().default(''),
+      URL_PREFIX: Joi.string().default('v1/api'),
       DATABASE_TYPE: Joi.string()
         .valid(['postgres'])
         .default('postgres'),
