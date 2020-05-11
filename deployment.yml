@@ -21,14 +21,14 @@ spec:
           readinessProbe:
             httpGet:
               path: /v1/api
-              port: 443
+              port: 80
             initialDelaySeconds: 5
             periodSeconds: 5
             timeoutSeconds: 3
           livenessProbe:
             httpGet:
               path: /v1/api
-              port: 443
+              port: 80
             initialDelaySeconds: 5
             periodSeconds: 5
             timeoutSeconds: 3
@@ -50,7 +50,7 @@ spec:
   #   port: 443
   #   targetPort: 3001
   - name: https
-    port: 443
+    port: 80
     targetPort: 3001
 
 ---
@@ -113,13 +113,13 @@ spec:
   #   - www.skotnickiservices.com
   #   # secretName: skotnickiservices
   rules:
-  - host: skotnickiservices.com
+  - host: www.skotnickiservices.com
     http:
       paths:
       - path: /v1/api
         backend:
           serviceName: api-demo-nestjs-service
-          servicePort: 443
+          servicePort: 80
       # - path: /v2/*
       #   backend:
       #     serviceName: api-demo-nestjs-service-2
