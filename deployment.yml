@@ -18,17 +18,17 @@ spec:
           env:
             - name: NODE_ENV
               value: "production"
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: 8080
-          #   initialDelaySeconds: 60
-          #   periodSeconds: 30
-          #   timeoutSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /v1/api
+              port: 80
+            initialDelaySeconds: 60
+            periodSeconds: 30
+            timeoutSeconds: 3
           # livenessProbe:
           #   httpGet:
-          #     path: /
-          #     port: 8080
+          #     path: /v1/api
+          #     port: 80
           #   initialDelaySeconds: 60
           #   periodSeconds: 30
           #   timeoutSeconds: 3
