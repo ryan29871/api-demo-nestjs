@@ -38,18 +38,34 @@ spec:
 # apiVersion: v1
 # kind: Service
 # metadata:
-#   name: api-demo-nestjs-service
-#   # annotations:
-#   #   cloud.google.com/neg: '{"ingress": true}'
+#   name: api-demo-nestjs-server-lb
 # spec:
-#   type: NodePort
 #   selector:
 #     app: api-demo-nestjs-server
+#   type: LoadBalancer
 #   ports:
-#   - name: http
-#     protocol: TCP
-#     port: 80
-#     targetPort: 3001
+#     - name: http
+#       protocol: TCP
+#       port: 80
+#       targetPort: 3001
+
+# ---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-demo-nestjs-service
+  # annotations:
+  #   cloud.google.com/neg: '{"ingress": true}'
+spec:
+  selector:
+    app: api-demo-nestjs-server
+  type: NodePort
+  ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 3001
 
 ---
 
@@ -68,20 +84,6 @@ spec:
 
 # ---
 
-apiVersion: v1
-kind: Service
-metadata:
-  name: api-demo-nestjs-server-lb
-spec:
-  selector:
-    app: api-demo-nestjs-server
-  type: LoadBalancer
-  ports:
-    - name: http
-      protocol: TCP
-      port: 80
-      targetPort: 3001
-
 # apiVersion: v1
 # kind: Secret
 # metadata:
@@ -92,34 +94,34 @@ spec:
 #   tls.key: base64 encoded key
 # type: kubernetes.io/tls
 
----
+# ---
 
-# apiVersion: networking.k8s.io/v1beta1
-# kind: Ingress
-# metadata:
-#   name: api-demo-nestjs-server-ingress
-#   annotations:
-#     kubernetes.io/ingress.global-static-ip-name: "kubernetes-ingress"
-#     networking.gke.io/managed-certificates: "skotnickiservices"
-#     # kubernetes.io/ingress.allow-http: "false"
-# spec:
-#   # backend:
-#   #   serviceName: api-demo-nestjs-service
-#   #   servicePort: 80
-#   # tls:
-#   # - hosts:
-#   #   - www.skotnickiservices.com
-#   #   # secretName: skotnickiservices
-#   rules:
-#   - host: www.skotnickiservices.com
-#     http:
-#       paths:
-#       - path: /*
-#         backend:
-#           serviceName: api-demo-nestjs-service
-#           servicePort: 80
-#       # - path: /v2/*
-#       #   backend:
-#       #     serviceName: api-demo-nestjs-service-2
-#       #     servicePort: 80
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: api-demo-nestjs-server-ingress
+  # annotations:
+  #   kubernetes.io/ingress.global-static-ip-name: "kubernetes-ingress"
+  #   networking.gke.io/managed-certificates: "skotnickiservices"
+    # kubernetes.io/ingress.allow-http: "false"
+spec:
+  backend:
+    serviceName: api-demo-nestjs-service
+    servicePort: 80
+  # tls:
+  # - hosts:
+  #   - www.skotnickiservices.com
+  #   # secretName: skotnickiservices
+  # rules:
+  # - host: www.skotnickiservices.com
+  #   http:
+  #     paths:
+  #     - path: /*
+  #       backend:
+  #         serviceName: api-demo-nestjs-service
+  #         servicePort: 80
+      # - path: /v2/*
+      #   backend:
+      #     serviceName: api-demo-nestjs-service-2
+      #     servicePort: 80
 
