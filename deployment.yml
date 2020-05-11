@@ -18,20 +18,20 @@ spec:
           env:
             - name: NODE_ENV
               value: "production"
-          readinessProbe:
-            httpGet:
-              path: /v1/api
-              port: 8080
-            initialDelaySeconds: 60
-            periodSeconds: 30
-            timeoutSeconds: 3
-          livenessProbe:
-            httpGet:
-              path: /v1/api
-              port: 8080
-            initialDelaySeconds: 60
-            periodSeconds: 30
-            timeoutSeconds: 3
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 8080
+          #   initialDelaySeconds: 60
+          #   periodSeconds: 30
+          #   timeoutSeconds: 3
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: 8080
+          #   initialDelaySeconds: 60
+          #   periodSeconds: 30
+          #   timeoutSeconds: 3
 
 ---
 
@@ -108,7 +108,7 @@ spec:
     # http:
   - http:
       paths:
-      - path: /v1/api
+      - path: /
         backend:
           serviceName: api-demo-nestjs-service
           servicePort: 80
