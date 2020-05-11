@@ -101,7 +101,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: "gce"
     kubernetes.io/ingress.global-static-ip-name: "kubernetes-ingress"
-  #   networking.gke.io/managed-certificates: "skotnickiservices"
+    networking.gke.io/managed-certificates: "skotnickiservices"
     # kubernetes.io/ingress.allow-http: "false"
 spec:
   backend:
@@ -111,14 +111,14 @@ spec:
   # - hosts:
   #   - www.skotnickiservices.com
   #   # secretName: skotnickiservices
-  # rules:
-  # - host: www.skotnickiservices.com
-  #   http:
-  #     paths:
-  #     - path: /*
-  #       backend:
-  #         serviceName: api-demo-nestjs-service
-  #         servicePort: 80
+  rules:
+  - host: skotnickiservices.com
+    http:
+      paths:
+      - path: /v1
+        backend:
+          serviceName: api-demo-nestjs-service
+          servicePort: 80
       # - path: /v2/*
       #   backend:
       #     serviceName: api-demo-nestjs-service-2
