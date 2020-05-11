@@ -46,9 +46,9 @@ spec:
   selector:
     app: api-demo-nestjs-server
   ports:
-  - name: http
-    port: 443
-    targetPort: 3001
+  # - name: http
+  #   port: 443
+  #   targetPort: 3001
   - name: https
     port: 80
     targetPort: 3001
@@ -103,6 +103,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.global-static-ip-name: "kubernetes-ingress"
     networking.gke.io/managed-certificates: "skotnickiservices"
+    # kubernetes.io/ingress.allow-http: "false"
 spec:
   # backend:
   #   serviceName: api-demo-nestjs-service
