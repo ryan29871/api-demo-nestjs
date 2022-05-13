@@ -1,7 +1,3 @@
-team: qa
-role: slack
-owner: qa
-
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
