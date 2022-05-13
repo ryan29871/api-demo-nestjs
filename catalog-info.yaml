@@ -17,4 +17,4 @@ metadata:
 spec:
   type: service
   lifecycle: production
-  owner: dpe-team
+  owner: test-team
